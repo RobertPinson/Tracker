@@ -1,11 +1,10 @@
 using System;
+using Homeworld.Tracker.Web.Models;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
-using Tracker.Models;
 
-namespace Tracker.Migrations
+namespace Homeworld.Tracker.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -98,7 +97,7 @@ namespace Tracker.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Tracker.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Tracker.web.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -146,7 +145,7 @@ namespace Tracker.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
                 });
 
-            modelBuilder.Entity("Tracker.Models.Card", b =>
+            modelBuilder.Entity("Tracker.web.Models.Card", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -157,7 +156,7 @@ namespace Tracker.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Tracker.Models.Person", b =>
+            modelBuilder.Entity("Tracker.web.Models.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -171,7 +170,7 @@ namespace Tracker.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Tracker.Models.PersonCard", b =>
+            modelBuilder.Entity("Tracker.web.Models.PersonCard", b =>
                 {
                     b.Property<int>("PersonId");
 
@@ -189,14 +188,14 @@ namespace Tracker.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Tracker.Models.ApplicationUser")
+                    b.HasOne("Tracker.web.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Tracker.Models.ApplicationUser")
+                    b.HasOne("Tracker.web.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -207,18 +206,18 @@ namespace Tracker.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("Tracker.Models.ApplicationUser")
+                    b.HasOne("Tracker.web.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Tracker.Models.PersonCard", b =>
+            modelBuilder.Entity("Tracker.web.Models.PersonCard", b =>
                 {
-                    b.HasOne("Tracker.Models.Card")
+                    b.HasOne("Tracker.web.Models.Card")
                         .WithMany()
                         .HasForeignKey("CardId");
 
-                    b.HasOne("Tracker.Models.Person")
+                    b.HasOne("Tracker.web.Models.Person")
                         .WithMany()
                         .HasForeignKey("PersonId");
                 });

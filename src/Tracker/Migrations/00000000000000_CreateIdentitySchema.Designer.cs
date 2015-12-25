@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Homeworld.Tracker.Web.Models;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using Tracker.Models;
 
-namespace Tracker.Migrations
+namespace Homeworld.Tracker.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
@@ -99,7 +96,7 @@ namespace Tracker.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Tracker.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Tracker.web.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -156,14 +153,14 @@ namespace Tracker.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Tracker.Models.ApplicationUser")
+                    b.HasOne("Tracker.web.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Tracker.Models.ApplicationUser")
+                    b.HasOne("Tracker.web.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -174,7 +171,7 @@ namespace Tracker.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("Tracker.Models.ApplicationUser")
+                    b.HasOne("Tracker.web.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });

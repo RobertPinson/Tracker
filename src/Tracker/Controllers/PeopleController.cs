@@ -1,11 +1,9 @@
-using System.Linq;
 using System.Threading.Tasks;
+using Homeworld.Tracker.Web.Models;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using Tracker.Models;
 
-namespace Tracker.Controllers
+namespace Homeworld.Tracker.Web.Controllers
 {
     public class PeopleController : Controller
     {

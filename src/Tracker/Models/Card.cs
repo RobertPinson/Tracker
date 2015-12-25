@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Tracker.Models
+namespace Homeworld.Tracker.Web.Models
 {
     public class Card
     {
         public int Id { get; set; }
         public string Uid { get; set; }
+        public bool IsDeleted { get; set; }
 
         public ICollection<PersonCard> PersonCards { get; set; }
+        public ICollection<Movement> Movements { get; set; }
     }
 }
