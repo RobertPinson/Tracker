@@ -32,3 +32,11 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+.visible-item {
+    display: block;
+}
+
+.hidden-item {
+    display: none;
+}

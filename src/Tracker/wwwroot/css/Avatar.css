@@ -1,0 +1,36 @@
+﻿
+/* ------------------------------------- 
+    JCrop customization
+---------------------------------------- */
+
+#preview-pane {
+    position: absolute;
+    right: -160px;
+    z-index: 1;
+    display: block;
+    border: 1px #000 solid;
+}
+
+ .jcrop-thumb {
+  top: 0px;
+  right: -150px;
+  border: 1px black solid;
+}
+
+.upload-progress {
+    border: 1px #bbb solid;
+    padding: 0;
+}
+
+.upload-percent-value {
+    padding-left: 10px;
+    position: absolute;
+}
+
+.upload-percent-bar {
+    background-color: #bbb;
+    height: 20px;
+}
+.avatar-img {
+    cursor: pointer;
+}

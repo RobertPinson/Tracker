@@ -4,35 +4,49 @@
     ViewData["Title"] = "Edit";
 }
 
+@section Styles{
+    <link href="~/css/avatar.css" rel="stylesheet" />
+    <link href="~/lib/jcrop/css/jcrop.css" rel="stylesheet" />
+}
 <h2>Edit</h2>
 
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>Person</h4>
-        <hr />
-        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="LastName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+<div class="row @(Model.Image == null?"visible-item":"hidden-item")" id="avatar-edit-container">
+    @Html.Partial("_Upload")
+</div>
+<div class="row @(Model.Image != null?"visible-item":"hidden-item")" id="avatar-container">
+    <div id="avatar" class="col-md-10">
+        <img src="@Url.Action("GetAvatar", "People", new {id = Model.Id})" alt="Upload Image" class="avatar-img" />
     </div>
-</form>
+</div>
+<div class="row">
+    <form asp-action="Edit">
+        <div class="form-horizontal">
+            <h4>Person</h4>
+            <hr />
+            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -40,6 +54,9 @@
 
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jcrop/js/Jcrop.js"></script>
+    <script src="~/lib/jquery-form/jquery.form.js"></script>
+    <script src="~/js/avatar.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

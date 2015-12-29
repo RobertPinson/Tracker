@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            Avatar
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
@@ -22,6 +25,9 @@
     
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <img src="@Url.Action("GetAvatar", "People", new { id = item.Id })" alt="Person Image" />
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>

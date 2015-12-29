@@ -2,8 +2,11 @@
 using Homeworld.Tracker.Web.Models;
 using Homeworld.Tracker.Web.Services;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.FileProviders;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.StaticFiles;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -105,12 +108,10 @@ namespace Homeworld.Tracker.Web
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseStaticFiles();
-
             app.UseIdentity();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
-
+            app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
