@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Homeworld.Tracker.Web.Domain;
 using Homeworld.Tracker.Web.Dtos;
 using Microsoft.AspNet.Mvc;
@@ -42,6 +43,8 @@ namespace Homeworld.Tracker.Web.Controllers
                 Image = movementResult.Person.Image,
                 Ingress = movementResult.Ingress
             };
+
+            Debug.WriteLine("Id: {0} Name: {1}", result.Id, result.Name);
 
             return Ok(result);
         }

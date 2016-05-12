@@ -32,8 +32,8 @@ namespace Homeworld.Tracker.Web.Controllers
 
         #region ---IMAGE UPLOAD ------
 
-        private const int AvatarStoredWidth = 100;  // ToDo - Change the size of the stored avatar image
-        private const int AvatarStoredHeight = 100; // ToDo - Change the size of the stored avatar image
+        private const int AvatarStoredWidth = 200;  // ToDo - Change the size of the stored avatar image
+        private const int AvatarStoredHeight = 200; // ToDo - Change the size of the stored avatar image
         private const int AvatarScreenWidth = 400;  // ToDo - Change the value of the width of the image on the screen
 
         private const string TempFolder = "Temp";
@@ -52,7 +52,7 @@ namespace Homeworld.Tracker.Web.Controllers
 
             var file = files;
 
-            if (file == null || !IsImage(file)) return Json(new { success = false, errorMessage = "File is of wrong format." });
+            if (!IsImage(file)) return Json(new { success = false, errorMessage = "File is of wrong format." });
 
             if (file.Length <= 0) return Json(new { success = false, errorMessage = "File cannot be zero length." });
 
@@ -193,6 +193,33 @@ namespace Homeworld.Tracker.Web.Controllers
 
 
         #endregion
+
+        // GET: People
+        [Produces("application/json")]
+        [Route("api/people")]
+        public async Task<IActionResult> Get(string excludeIds, string deviceId)
+        {
+
+            var data = await _context.Person.Include(p => p.PersonCards).ThenInclude(c => c.Card).ToListAsync();
+
+            dynamic res = data.Select(MapToResponse);
+
+            return Ok(new {People = res});
+        }
+
+        private object MapToResponse(Person person)
+        {
+            var personCard = person.PersonCards.FirstOrDefault(c => c.Card.IsDeleted == false);
+            var cardId = personCard == null ? string.Empty : personCard.Card.Uid;
+
+            return new
+            {
+                Id = person.Id,
+                Name = $"{person.FirstName} {person.LastName}",
+                Image = person.Image,
+                CardId = cardId
+            };
+        }
 
         // GET: People
         public async Task<IActionResult> Index()
