@@ -8,5 +8,6 @@ namespace Homeworld.Tracker.Web.Domain.Model
         public bool Ingress { get; set; }
         public bool IsError { get; set; }
         public string ErrorMessage { get; set; }
+        public string CardUid { get; set; }
     }
 }

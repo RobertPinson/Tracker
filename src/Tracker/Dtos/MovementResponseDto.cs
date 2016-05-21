@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public byte[] Image { get; set; }
         public bool Ingress { get; set; }
+        public string CardUid { get; set; }
     }
 }

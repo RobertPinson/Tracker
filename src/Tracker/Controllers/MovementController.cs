@@ -41,7 +41,8 @@ namespace Homeworld.Tracker.Web.Controllers
                 Id = movementResult.Person.Id,
                 Name = $"{movementResult.Person.FirstName} {movementResult.Person.LastName}",
                 Image = movementResult.Person.Image,
-                Ingress = movementResult.Ingress
+                Ingress = movementResult.Ingress,
+                CardUid = movementResult.CardUid
             };
 
             Debug.WriteLine("Id: {0} Name: {1}", result.Id, result.Name);

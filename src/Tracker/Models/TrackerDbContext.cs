@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Infrastructure;
 
 namespace Homeworld.Tracker.Web.Models
 {
     public class TrackerDbContext : DbContext
     {
+        public TrackerDbContext(DbContextOptions options) : base(options)
+        {}
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
            base.OnModelCreating(builder);

@@ -1,4 +1,5 @@
-﻿using Homeworld.Tracker.Web.Domain;
+﻿using Homeworld.Tracker.web.Domain;
+using Homeworld.Tracker.Web.Domain;
 using Homeworld.Tracker.Web.Models;
 using Homeworld.Tracker.Web.Services;
 using Microsoft.AspNet.Builder;
@@ -35,6 +36,8 @@ namespace Homeworld.Tracker.Web
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            MqttWrapper.Connect();
         }
 
         public IConfigurationRoot Configuration { get; set; }

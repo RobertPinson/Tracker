@@ -67,7 +67,7 @@ namespace Homeworld.Tracker.Web.Domain
                         CardId = movement.Uid,
                         DeviceId = movement.DeviceId,
                         LocationId = locationId,
-                        SwipeTime = DateTime.Now
+                        SwipeTime = movement.SwipeTime
                     });
 
                     _context.SaveChanges();
@@ -86,6 +86,7 @@ namespace Homeworld.Tracker.Web.Domain
                               select p).FirstOrDefault();
 
                 result.Person = person;
+                result.CardUid = movement.Uid;
             }
             catch (Exception ex)
             {

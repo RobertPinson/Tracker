@@ -197,27 +197,37 @@ namespace Homeworld.Tracker.Web.Controllers
         // GET: People
         [Produces("application/json")]
         [Route("api/people")]
-        public async Task<IActionResult> Get(string excludeIds, string deviceId)
+        public async Task<IActionResult> Get(string excludeIds, int deviceId)
         {
-
             var data = await _context.Person.Include(p => p.PersonCards).ThenInclude(c => c.Card).ToListAsync();
+            var location = (from d in _context.Device
+                            join l in _context.Location on d.LocationId equals l.Id
+                            where d.Id.Equals(deviceId)
+                            select l).FirstOrDefault();
 
-            dynamic res = data.Select(MapToResponse);
+            dynamic res = data.Select(p => MapToResponse(p, location.Id));
 
-            return Ok(new {People = res});
+            return Ok(new { People = res });
         }
 
-        private object MapToResponse(Person person)
+        private object MapToResponse(Person person, int locationId)
         {
             var personCard = person.PersonCards.FirstOrDefault(c => c.Card.IsDeleted == false);
             var cardId = personCard == null ? string.Empty : personCard.Card.Uid;
 
+            //Check ingress or egress
+            var latestMovement =
+                _context.Movement
+                    .OrderByDescending(m => m.SwipeTime)
+                    .FirstOrDefault(m => m.CardId == cardId);
+            
             return new
             {
                 Id = person.Id,
                 Name = $"{person.FirstName} {person.LastName}",
                 Image = person.Image,
-                CardId = cardId
+                CardId = cardId,
+                InLocation = latestMovement != null && latestMovement.LocationId == locationId
             };
         }
 
