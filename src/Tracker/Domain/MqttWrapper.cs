@@ -42,17 +42,24 @@ namespace Homeworld.Tracker.web.Domain
 
         private static void ClientOnMqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            Debug.WriteLine("Received = " + Encoding.UTF8.GetString(e.Message) + " on topic " + e.Topic);
-            var data = JsonConvert.DeserializeObject<dynamic>(Encoding.UTF8.GetString(e.Message));
+            try
+            {
+                Debug.WriteLine("Received = " + Encoding.UTF8.GetString(e.Message) + " on topic " + e.Topic);
+                var data = JsonConvert.DeserializeObject<dynamic>(Encoding.UTF8.GetString(e.Message));
 
-            DateTime swipeTimeUTC;
-            var result = DateTime.TryParse(data.SwipeTime.ToString(), out swipeTimeUTC);
+                DateTime swipeTimeUTC;
+                var result = DateTime.TryParse(data.SwipeTime.ToString(), out swipeTimeUTC);
 
-            swipeTimeUTC = result ? swipeTimeUTC : DateTime.UtcNow;
+                swipeTimeUTC = result ? swipeTimeUTC : DateTime.UtcNow;
 
-            var movementData = new MovementDto {DeviceId = data.DeviceId, Uid = data.CardId, SwipeTime = swipeTimeUTC};
+                var movementData = new MovementDto { DeviceId = data.DeviceId, CardUid = data.CardId, SwipeTime = swipeTimeUTC };
 
-            _movementService.Save(movementData);
+                _movementService.Save(movementData);
+            }
+            catch (Exception ex)
+            {
+                //todo log ex
+            }
         }
 
         private static void ClientOnMqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)

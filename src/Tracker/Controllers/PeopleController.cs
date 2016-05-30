@@ -197,6 +197,7 @@ namespace Homeworld.Tracker.Web.Controllers
         // GET: People
         [Produces("application/json")]
         [Route("api/people")]
+        [ResponseCache(Duration = 0)]
         public async Task<IActionResult> Get(string excludeIds, int deviceId)
         {
             var data = await _context.Person.Include(p => p.PersonCards).ThenInclude(c => c.Card).ToListAsync();
@@ -226,7 +227,7 @@ namespace Homeworld.Tracker.Web.Controllers
                 Id = person.Id,
                 Name = $"{person.FirstName} {person.LastName}",
                 Image = person.Image,
-                CardId = cardId,
+                CardUid = cardId,
                 InLocation = latestMovement != null && latestMovement.LocationId == locationId
             };
         }
